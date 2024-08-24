@@ -58,6 +58,21 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* AI 모드 텍스트 스타일 */
+.toggle-container p:first-child {
+    margin-right: 15px; /* AI 모드 텍스트 오른쪽 여백 추가 */
+    margin-left: 15px; /* AI 모드 텍스트 왼쪽 여백 추가 */
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* 2인용 모드 텍스트 스타일 */
+.toggle-container p:last-child {
+    margin-left: 15px; /* 2인용 모드 텍스트 왼쪽 여백 추가 */
+    font-size: 1.2rem;
+    color: #333;
+}
+
 .switch {
     position: relative;
     display: inline-block;
