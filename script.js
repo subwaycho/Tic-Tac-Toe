@@ -92,11 +92,40 @@ function updateCell(cell, player) {
     cell.innerHTML = `<span>${player}</span>`;
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    const modeToggle = document.getElementById('mode-toggle');
+    const isTwoPlayerMode = localStorage.getItem('isTwoPlayerMode') === 'true'; // 로컬 스토리지에서 값 불러오기
+
+    modeToggle.checked = isTwoPlayerMode; // 슬라이드 버튼 상태 설정
+    updateGameMode(isTwoPlayerMode);
+
+    modeToggle.addEventListener('change', function () {
+        const isTwoPlayerMode = modeToggle.checked;
+        localStorage.setItem('isTwoPlayerMode', isTwoPlayerMode); // 로컬 스토리지에 현재 상태 저장
+        updateGameMode(isTwoPlayerMode);
+    });
+});
+
+function updateGameMode(isTwoPlayerMode) {
+    if (isTwoPlayerMode) {
+        currentPlayer = 'O'; // 플레이어 1이 'O'
+        alert('2인용 모드로 전환되었습니다.');
+    } else {
+        currentPlayer = 'O'; // 플레이어가 먼저 시작
+        alert('AI 모드로 전환되었습니다.');
+    }
+    resetGame(); // 게임 초기화
+}
+
 function checkResult(winner) {
     if (checkWin(winner)) {
         setTimeout(() => {
-            if (!isTwoPlayerMode && winner === 'X') {
-                alert(`AI가 승리했습니다! 게임을 다시 시작합니다.`);
+            if (!isTwoPlayerMode) {
+                if (winner === 'X') {
+                    alert(`AI가 승리했습니다! 게임을 다시 시작합니다.`);
+                } else if (winner === 'O') {
+                    alert(`플레이어가 승리했습니다! 게임을 다시 시작합니다.`);
+                }
             } else {
                 alert(`${winner}가 승리했습니다! 게임을 다시 시작합니다.`);
             }
@@ -109,6 +138,8 @@ function checkResult(winner) {
         }, 100);
     }
 }
+
+
 
 
 function checkWin(player) {
